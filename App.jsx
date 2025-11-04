@@ -764,8 +764,32 @@ const App = () => {
                 return null;
         }
     };
-    export default App;
+return (
+    <div className="flex flex-col h-screen bg-gray-50">
+            <div className="bg-white shadow-md p-4">
+                <div className="flex space-x-4">
+                    {TABS.map(tab => (
+                        <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-4 py-2 rounded-lg font-medium transition duration-200 ${
+                                activeTab === tab
+                                    ? 'bg-indigo-600 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-indigo-100'
+                            }`}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className="flex-grow overflow-auto">
+                {renderContent()}
+            </div>
+        </div>
+ );
 
+export default App;
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<App />);
