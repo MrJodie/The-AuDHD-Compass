@@ -441,7 +441,6 @@ const Discussions = ({ db, userId }) => {
             </div>
         </div>
     );
-};
 
 // 3. Chat Tab Content (Real-time group chat)
 const Chat = ({ db, userId }) => {
@@ -764,7 +763,6 @@ const App = () => {
                 return null;
         }
     };
-    export default App;
 
 const container = document.getElementById('root');
 const root = createRoot(container);
