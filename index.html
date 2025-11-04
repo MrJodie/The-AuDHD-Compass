@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The AuDHD Compass</title>
-
-    <!-- Google Analytics Tracking Snippet (Replaces the Next.js component) -->
-    <!-- IMPORTANT: Replace 'YOUR_TRACKING_ID' with your actual Google Analytics 4 (GA4) Measurement ID (G-XXXXXXXXXX) -->
+    <!-- Google Analytics Tracking Placeholder -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'YOUR_TRACKING_ID');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_TRACKING_ID');
     </script>
+    <style>
+        /* This prevents layout shift while the app loads */
+        #root { min-height: 100vh; } 
+    </style>
+    <!-- 
+        Vite automatically injects the compiled JavaScript bundle 
+        into this link when the build process runs.
+        We will manually add a placeholder for Vercel to look at.
+    -->
+    <script type="module" crossorigin src="/assets/index-BQJ-MtLJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/style.css">
 </head>
 <body>
-    <!-- The root element where the React app will be rendered -->
     <div id="root"></div>
-    <!-- Script to load the main application entry point: CHANGED PATH -->
-    <script type="module" src="./App.jsx"></script> 
 </body>
 </html>
