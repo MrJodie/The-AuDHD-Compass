@@ -17,8 +17,11 @@
     <!-- This line loads the Tailwind CSS library directly -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- CRITICAL FIX: The core vendor/dependency script must load first. -->
+    <!-- The path is typically 'assets/index-BQJ-MtLJ.js' but this is not guaranteed -->
+    <!-- We will rely on Vercel's rewrite in vercel.json and ensure App.jsx is clean -->
+
     <!-- This is the compiled JavaScript bundle created by Vercel/Vite -->
-    <!-- The actual filename (index-BQJ-MtLJ.js) changes with every build, but Vercel manages the paths -->
     <script type="module" crossorigin src="/assets/index-BQJ-MtLJ.js"></script>
 </head>
 <body>
