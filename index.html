@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The AuDHD Compass</title>
-    <!-- Google Analytics Tracking Placeholder -->
+
+    <!-- Google Analytics Tracking Snippet (You must replace 'YOUR_TRACKING_ID' with your actual GA4 Measurement ID) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'YOUR_TRACKING_ID');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_TRACKING_ID');
     </script>
-    <style>
-        /* This prevents layout shift while the app loads */
-        #root { min-height: 100vh; } 
-    </style>
-    <!-- 
-        Vite automatically injects the compiled JavaScript bundle 
-        into this link when the build process runs.
-        We will manually add a placeholder for Vercel to look at.
-    -->
+    
+    <!-- This line loads the Tailwind CSS library directly -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- This is the compiled JavaScript bundle created by Vercel/Vite -->
+    <!-- The actual filename (index-BQJ-MtLJ.js) changes with every build, but Vercel manages the paths -->
     <script type="module" crossorigin src="/assets/index-BQJ-MtLJ.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/style.css">
 </head>
 <body>
+    <!-- The root element where the React app will be rendered -->
     <div id="root"></div>
 </body>
 </html>
