@@ -742,7 +742,7 @@ const App = () => {
             );
         }
 
-        if (!db || !userId) {
+        if (!db || !userId)
             return (
                 <div className="flex justify-center items-center h-full p-8 text-center bg-red-50 text-red-800 border-red-300 border rounded-xl">
                     <p className="font-semibold">
@@ -763,8 +763,7 @@ const App = () => {
             default:
                 return null;
         }
-    };
-return (
+        return (
     <div className="flex flex-col h-screen bg-gray-50">
             <div className="bg-white shadow-md p-4">
                 <div className="flex space-x-4">
@@ -787,9 +786,6 @@ return (
                 {renderContent()}
             </div>
         </div>
- );
-
+    );
+}
 export default App;
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(<App />);
