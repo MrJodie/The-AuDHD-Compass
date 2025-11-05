@@ -1,6 +1,7 @@
-}
+﻿}
 export default App;
 
 const container = document.getElementById('root');
 koot = createRoot(container);
 root.render(<App />);
+
