@@ -579,6 +579,7 @@ const App = () => {
         </div>
     );
 };
+
 export default App;
 
 const container = document.getElementById('root');
