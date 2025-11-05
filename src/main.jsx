@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx"; // adjust path if App.jsx is elsewhere
+import App from "./app.jsx"; // adjust path if App.jsx is elsewhere
 import "./index.css"; // optional, if you have Tailwind or global styles
 
 // Mount React app
