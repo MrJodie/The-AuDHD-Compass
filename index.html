@@ -1,25 +1,43 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The AuDHD Compass</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The AuDHD Compass</title>
 
-  <!-- Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYXW4VCD99"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QYXW4VCD99');
-  </script>
+    <!-- ✅ Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QYXW4VCD99"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-QYXW4VCD99");
+    </script>
 
-  <!-- Tailwind (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-  <div id="root"></div>
-  <!-- ✅ Correct entry for Vite -->
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <!-- ✅ Tailwind (for dev) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Firebase Configuration -->
+    <script>
+      // This is your Firebase config injected into the frontend
+      window.__firebase_config = JSON.stringify({
+        apiKey: "AIzaSyBW9VXbx-ay4AHtfjwhhUYZbXAP2zeg6aA",
+        authDomain: "the-audhd-compass.firebaseapp.com",
+        projectId: "the-audhd-compass",
+        storageBucket: "the-audhd-compass.firebasestorage.app",
+        messagingSenderId: "914395451965",
+        appId: "1:914395451965:web:090b487d400487280ad054",
+        measurementId: "G-QYXW4VCD99",
+      });
+    </script>
+  </head>
+
+  <body class="bg-gray-50">
+    <div id="root"></div>
+
+    <!-- ✅ React entry point -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

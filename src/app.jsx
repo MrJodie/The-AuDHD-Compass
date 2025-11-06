@@ -7,22 +7,11 @@ import {
   signInWithCustomToken,
   onAuthStateChanged,
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  query,
-  onSnapshot,
-  doc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  where,
-  getDocs,
-  runTransaction,
-  serverTimestamp,
-} from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
-// --- GLOBAL VARIABLES ---
+// -------------------------------
+// 🔧 Global Config Setup
+// -------------------------------
 const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
 const firebaseConfig =
   typeof __firebase_config !== "undefined"
@@ -33,7 +22,12 @@ const initialAuthToken =
     ? __initial_auth_token
     : null;
 
-// --- HOOK: Firebase Setup ---
+// ✅ Debug: confirm Firebase config loaded
+console.log("Firebase config detected in App.jsx:", firebaseConfig);
+
+// -------------------------------
+// 🔥 Custom Firebase Hook
+// -------------------------------
 const useFirebase = () => {
   const [db, setDb] = useState(null);
   const [auth, setAuth] = useState(null);
@@ -44,17 +38,23 @@ const useFirebase = () => {
   useEffect(() => {
     if (!appInitialized && Object.keys(firebaseConfig).length > 0) {
       try {
+        console.log("Initializing Firebase with config:", firebaseConfig);
         setLogLevel("debug");
+
         const app = initializeApp(firebaseConfig);
+        console.log("✅ Firebase app initialized:", app.name);
+
         const authInstance = getAuth(app);
         const dbInstance = getFirestore(app);
 
         setAuth(authInstance);
         setDb(dbInstance);
+        console.log("✅ Firebase Auth and Firestore initialized.");
 
         const attemptSignIn = async () => {
           let user = null;
 
+          // If custom token exists, try that first
           if (initialAuthToken) {
             try {
               const userCredential = await signInWithCustomToken(
@@ -62,29 +62,33 @@ const useFirebase = () => {
                 initialAuthToken
               );
               user = userCredential.user;
-              console.log("Firebase: Signed in with Custom Token.");
+              console.log("✅ Signed in with custom token:", user.uid);
             } catch (error) {
-              console.error(
-                "Firebase: Custom token sign-in failed. Falling back to anonymous.",
+              console.warn(
+                "⚠️ Custom token sign-in failed, falling back to anonymous:",
                 error
               );
             }
           }
 
+          // Fallback: anonymous auth
           if (!user) {
             try {
               const userCredential = await signInAnonymously(authInstance);
               user = userCredential.user;
-              console.log("Firebase: Signed in anonymously.");
+              console.log("✅ Signed in anonymously:", user.uid);
             } catch (error) {
-              console.error("Firebase: Anonymous sign-in failed.", error);
+              console.error("❌ Anonymous sign-in failed:", error);
             }
           }
 
+          // Monitor Auth state
           onAuthStateChanged(authInstance, (user) => {
             if (user) {
+              console.log("👤 Auth state changed. UID:", user.uid);
               setUserId(user.uid);
             } else {
+              console.warn("⚠️ No user authenticated");
               setUserId(null);
             }
             setIsAuthReady(true);
@@ -93,8 +97,9 @@ const useFirebase = () => {
 
         attemptSignIn();
         setAppInitialized(true);
+        console.log("✅ Firebase initialization sequence complete.");
       } catch (e) {
-        console.error("Firebase initialization error:", e);
+        console.error("❌ Firebase initialization error:", e);
         setIsAuthReady(true);
       }
     }
@@ -103,7 +108,9 @@ const useFirebase = () => {
   return { db, auth, userId, isAuthReady };
 };
 
-// --- MAIN APP COMPONENT ---
+// -------------------------------
+// ⚙️ Main App Component
+// -------------------------------
 const App = () => {
   const { db, userId, isAuthReady } = useFirebase();
   const [activeTab, setActiveTab] = useState("Discussions");
@@ -129,8 +136,9 @@ const App = () => {
             <path
               className="opacity-75"
               fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0
-                c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2
+                 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824
+                 3 7.938l3-2.647z"
             ></path>
           </svg>
           Connecting to AuDHD Compass Backend...
@@ -142,8 +150,9 @@ const App = () => {
       return (
         <div className="flex justify-center items-center h-full p-8 text-center bg-red-50 text-red-800 border-red-300 border rounded-xl">
           <p className="font-semibold">
-            Connection Error: Could not initialize Firebase or retrieve User ID.
-            Please ensure your Firebase config is valid.
+            ❌ Connection Error: Firebase not initialized or User ID missing.
+            <br />
+            Please verify your Firebase config and Auth settings.
           </p>
         </div>
       );
@@ -151,11 +160,11 @@ const App = () => {
 
     switch (activeTab) {
       case "Discussions":
-        return <div className="p-8 text-gray-700">Discussions Tab Placeholder</div>;
+        return <div className="p-8 text-gray-700">💬 Discussions Placeholder</div>;
       case "Chat":
-        return <div className="p-8 text-gray-700">Chat Tab Placeholder</div>;
+        return <div className="p-8 text-gray-700">💭 Chat Placeholder</div>;
       case "Wiki":
-        return <div className="p-8 text-gray-700">Wiki Tab Placeholder</div>;
+        return <div className="p-8 text-gray-700">📚 Wiki Placeholder</div>;
       default:
         return null;
     }
@@ -194,7 +203,9 @@ const App = () => {
   );
 };
 
-// --- EXPORT & RENDER MOUNT ---
+// -------------------------------
+// 🧠 Render Root
+// -------------------------------
 export default App;
 
 const container = document.getElementById("root");
